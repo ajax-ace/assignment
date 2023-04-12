@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Experiment 5 - Banner</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .banner {
+      width: 100%;
+      margin-top: 10px;
+      margin-left: 10px;
+      margin-right: 10px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      text-align: center;
+      font-size: 1cm;
+      color: #8c03fc;
+      background-color: lightgrey;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    
+    .banner:before,
+    .banner:after {
+      content: "";
+      display: table;
+    }
+
+    .banner:after {
+      clear: both;
+    }
+
+    .banner-inner {
+      margin: 0 auto;
+      width: 80%;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="banner">
+    <div class="banner-inner">
+      <p>Welcome to NITJSR</p>
+    </div>
+  </div>
+</body>
+
+</html>
