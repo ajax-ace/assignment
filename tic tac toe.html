@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Tic Tac Toe Game</title>
+        <style>
+            .grid {
+                display: inline-block;
+                width: 100px;
+                height: 100px;
+                border: 1px solid black;
+                font-size: 60px;
+                text-align: center;
+                vertical-align: middle;
+                line-height: 100px;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Tic Tac Toe Game</h1>
+        <div class="grid" id="0"></div>
+        <div class="grid" id="1"></div>
+        <div class="grid" id="2"></div>
+        <br>
+        <div class="grid" id="3"></div>
+        <div class="grid" id="4"></div>
+        <div class="grid" id="5"></div>
+        <br>
+        <div class="grid" id="6"></div>
+        <div class="grid" id="7"></div>
+        <div class="grid" id="8"></div>
+        <script>
+            var player = 'x';
+            var computer = 'o';
+            var empty = '';
+            var grid = ['', '', '', '', '', '', '', '', ''];
+            var winningCombination = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+            var isGameOver = false;
+
+            function onClick(id) {
+                if (isGameOver) {
+                    return;
+                }
+                if (grid[id] === empty) {
+                    grid[id] = player;
+                    document.getElementById(id).innerHTML = player;
+                    if (checkWinningCombination(player)) {
+                        alert("X Player Won");
+                        isGameOver = true;
+                        reset();
+                        return;
+                    }
+                    var emptyGrids = getEmptyGrids();
+                    if (emptyGrids.length === 0) {
+                        alert("Tie Game");
+                        isGameOver = true;
+                        reset();
+                        return;
+                    }
+                    var index = Math.floor(Math.random() * emptyGrids.length);
+                    grid[emptyGrids[index]] = computer;
+                    document.getElementById(emptyGrids[index]).innerHTML = computer;
+                    if (checkWinningCombination(computer)) {
+                        alert("Computer/O Won");
+                        isGameOver = true;
+                        reset();
+                        return;
+                    }
+                }
+            }
+
+            function checkWinningCombination(player) {
+                for (var i = 0; i < winningCombination.length; i++) {
+                    if (grid[winningCombination[i][0]] === player && grid[winningCombination[i][1]] === player && grid[winningCombination[i][2]] === player) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            function getEmptyGrids() {
+                var emptyGrids = [];
+                for (var i = 0; i < grid.length; i++) {
+                    if (grid[i] === empty) {
+                        emptyGrids.push(i);
+                    }
+                }
+                return emptyGrids;
+            }
+
+            function reset() {
+                for (var i = 0; i < grid.length; i++) {
+                    grid[i] = empty;
+                    document.getElementById(i).innerHTML = empty;
+                }
+                isGameOver = false;
+            }
+
+            var grids = document.getElementsByClassName('grid');
+            for (var i = 0; i < grids.length; i++) {
+                grids[i].addEventListener('click', function() { onClick(this.id); });
+            }
+        </script>
+    </body>
+</html>
