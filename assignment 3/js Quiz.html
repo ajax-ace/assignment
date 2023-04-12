@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Javascript Quiz</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+		}
+
+		.container {
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 20px;
+		}
+
+		h1 {
+			font-size: 36px;
+			font-weight: bold;
+			margin-bottom: 20px;
+		}
+
+		.question {
+			margin-bottom: 20px;
+		}
+
+		.options {
+			display: flex;
+			flex-wrap: wrap;
+			margin: -10px;
+		}
+
+		.option {
+			flex: 1 0 calc(50% - 20px);
+			margin: 10px;
+			padding: 10px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			cursor: pointer;
+			transition: background-color 0.3s ease;
+		}
+
+		.option:hover {
+			background-color: #f5f5f5;
+		}
+
+		.next-btn {
+			display: block;
+			margin-top: 20px;
+			padding: 10px 20px;
+			background-color: #4CAF50;
+			color: #fff;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			transition: background-color 0.3s ease;
+		}
+
+		.next-btn:hover {
+			background-color: #3e8e41;
+		}
+
+		.progress {
+			height: 10px;
+			background-color: #ddd;
+			position: relative;
+			margin-bottom: 20px;
+		}
+
+		.progress-bar {
+			height: 100%;
+			background-color: #4CAF50;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 0;
+			transition: width 0.3s ease;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Javascript Quiz</h1>
+		<div class="progress">
+			<div class="progress-bar"></div>
+		</div>
+		<div class="question-container"></div>
+		<button class="next-btn">Next</button>
+	</div>
+
+	<script>
+		// Define the quiz questions and options
+		const quiz = [
+			{
+				question: "What is the capital of France?",
+				options: ["Paris", "London", "Berlin", "Madrid"],
+				answer: "Paris"
+			},
+			{
+				question: "What is the largest country in the world?",
+				options: ["Russia", "China", "USA", "Canada"],
+				answer: "Russia"
+			},
+			{
+				question: "What is the currency of Japan?",
+				options: ["Dollar", "Pound", "Yen", "Euro"],
+				answer: "Yen"
+			},
+			{
+				question: "What is the highest mountain in the world?",
+                options: ["Mount Kilimanjaro", "Mount Everest", "Mount Fuji", "Mount McKinley"],
+                answer: "Mount Everest"
+            },
+            {
+            question: "What year did World War II end?",
+            options: ["1945", "1918", "1939", "1941"],
+            answer: "1945"
+            }
+            ];
+            	// Get necessary DOM elements
+	const questionContainer = document.querySelector('.question-container');
+	const nextBtn = document.querySelector('.next-btn');
+	const progressBar = document.querySelector('.progress-bar');
+
+	// Set initial state
+	let currentQuestion = 0;
+	let score = 0;
+
+	// Load question and options
+	function loadQuestion() {
+		const question = quiz[currentQuestion].question;
+		const options = quiz[currentQuestion].options;
+
+		// Update DOM with question and options
+		questionContainer.innerHTML = `
+			<div class="question">${question}</div>
+			<div class="options">
+				${options.map(option => `
+					<div class="option">${option}</div>
+				`).join('')}
+			</div>
+		`;
+
+		// Add click event listeners to options
+		const optionElements = document.querySelectorAll('.option');
+		optionElements.forEach(option => {
+			option.addEventListener('click', () => {
+				checkAnswer(option.textContent);
+			});
+		});
+	}
+
+	// Check if selected option is correct answer
+	function checkAnswer(selectedOption) {
+		if (selectedOption === quiz[currentQuestion].answer) {
+			score++;
+		}
+
+		currentQuestion++;
+
+		if (currentQuestion < quiz.length) {
+			loadQuestion();
+		} else {
+			showResults();
+		}
+	}
+
+	// Update progress bar width
+	function updateProgressBar() {
+		const percent = (currentQuestion / quiz.length) * 100;
+		progressBar.style.width = percent + '%';
+	}
+
+	// Show final results
+	function showResults() {
+		questionContainer.innerHTML = `
+			<div class="score">You scored ${score} out of ${quiz.length}</div>
+		`;
+		nextBtn.style.display = 'none';
+		progressBar.style.display = 'none';
+	}
+
+	// Load initial question
+	loadQuestion();
+
+	// Add click event listener to next button
+	nextBtn.addEventListener('click', () => {
+		updateProgressBar();
+	});
+</script>
+</body>
+</html>
