@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Banner and Navigation Example</title>
+    <style>
+      /* CSS for the banner */
+      .banner {
+        background-color: lightgrey;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        padding: 60px 0;
+        margin: 10px;
+        overflow: hidden;
+      }
+      .banner p {
+        color: #8c03fc;
+        font-size: 1cm;
+        text-align: center;
+        margin: 0;
+      }
+
+      /* CSS for the navigation bar */
+      .navbar {
+        background-color: black;
+        width: 25%;
+        margin-top: 20px;
+        float: left;
+      }
+      .navbar ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+      .navbar li {
+        display: block;
+        padding: 10px 0;
+        text-align: center;
+        font-family: Arial;
+      }
+      .navbar li:hover {
+        background-color: lightgreen;
+        color: black;
+      }
+      .navbar a {
+        display: block;
+        color: white;
+        text-decoration: none;
+        padding: 10px 0;
+      }
+      .navbar .active {
+        background-color: lightblue;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="banner">
+      <p>Welcome to NITJSR</p>
+    </div>
+    <div class="navbar">
+      <ul>
+        <li><a href="#" class="active">Home</a></li>
+        <li><a href="#">News</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+    <div style="float: left; width: 75%;">
+      <!-- Your content here -->
+    </div>
+  </body>
+</html>
