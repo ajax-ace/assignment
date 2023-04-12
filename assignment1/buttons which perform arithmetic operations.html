@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Array Operations with Reduce</title>
+	<style>
+		body {
+			text-align: center;
+		}
+		input[type="button"] {
+			background-color: #ccc;
+			padding: 10px;
+			margin: 10px;
+			border-radius: 5px;
+			border: none;
+			cursor: pointer;
+		}
+		input[type="button"]:hover {
+			background-color: green;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+	<label for="input-array">Enter a comma-separated list of numbers:</label><br>
+	<input type="text" id="input-array"><br>
+	<input type="button" value="Average" onclick="calculate('average')">
+	<input type="button" value="Sum" onclick="calculate('sum')">
+	<input type="button" value="Product" onclick="calculate('product')">
+	<input type="button" value="Max" onclick="calculate('max')">
+	<input type="button" value="Min" onclick="calculate('min')"><br>
+	<div id="output"></div>
+	<script>
+		function calculate(operation) {
+			// Get input from user as a string
+			var inputStr = document.getElementById("input-array").value;
+			// Convert input string to an array of numbers
+			var inputArr = inputStr.split(",").map(function(item) {
+				return parseFloat(item.trim());
+			});
+			// Define reduce functions for each button
+			var reduceFunc;
+			switch (operation) {
+				case "average":
+					reduceFunc = function(acc, val) {
+						return acc + val;
+					};
+					var result = inputArr.reduce(reduceFunc) / inputArr.length;
+					break;
+				case "sum":
+					reduceFunc = function(acc, val) {
+						return acc + val;
+					};
+					var result = inputArr.reduce(reduceFunc);
+					break;
+				case "product":
+					reduceFunc = function(acc, val) {
+						return acc * val;
+					};
+					var result = inputArr.reduce(reduceFunc);
+					break;
+				case "max":
+					reduceFunc = function(acc, val) {
+						return val > acc ? val : acc;
+					};
+					var result = inputArr.reduce(reduceFunc);
+					break;
+				case "min":
+					reduceFunc = function(acc, val) {
+						return val < acc ? val : acc;
+					};
+					var result = inputArr.reduce(reduceFunc);
+					break;
+			}
+			// Display result in output div
+			document.getElementById("output").innerHTML = "<p>" + operation + ": " + result + "</p>";
+		}
+	</script>
+</body>
+</html>
