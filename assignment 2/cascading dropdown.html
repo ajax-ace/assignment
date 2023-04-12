@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Cascading Dropdown Example</title>
+  </head>
+  <body>
+    <form>
+      <label for="subject">Subject:</label>
+      <select id="subject">
+        <option value="">Select a subject</option>
+        <option value="front-end">Front-end</option>
+        <option value="back-end">Back-end</option>
+      </select>
+      <br>
+      <label for="topic">Topic:</label>
+      <select id="topic" disabled>
+        <option value="">Select a topic</option>
+      </select>
+      <br>
+      <label for="chapter">Chapter:</label>
+      <select id="chapter" disabled>
+        <option value="">Select a chapter</option>
+      </select>
+    </form>
+
+    <script>
+      const subjects = {
+        "front-end": {
+          "HTML": ["Links", "Images", "Tables", "Lists"],
+          "CSS": ["Borders", "Margins", "Backgrounds"],
+          "Javascript": ["Variables", "Operators", "Arrays", "Objects"]
+        },
+        "back-end": {
+          "NodeJS": ["NPM", "HTTP", "Express"],
+          "PHP": ["Strings", "Arrays", "Regex"]
+        }
+      };
+
+      const subjectDropdown = document.getElementById("subject");
+      const topicDropdown = document.getElementById("topic");
+      const chapterDropdown = document.getElementById("chapter");
+
+      subjectDropdown.addEventListener("change", function() {
+        // clear previous options in topic and chapter dropdowns
+        topicDropdown.innerHTML = "<option value=''>Select a topic</option>";
+        chapterDropdown.innerHTML = "<option value=''>Select a chapter</option>";
+
+        // enable topic dropdown
+        topicDropdown.disabled = false;
+
+        // get selected subject
+        const selectedSubject = subjectDropdown.value;
+
+        if (selectedSubject) {
+          // get topics for selected subject
+          const topics = Object.keys(subjects[selectedSubject]);
+
+          // populate topic dropdown
+          topics.forEach(function(topic) {
+            const option = document.createElement("option");
+            option.value = topic;
+            option.text = topic;
+            topicDropdown.add(option);
+          });
+        } else {
+          // disable topic and chapter dropdowns if no subject is selected
+          topicDropdown.disabled = true;
+          chapterDropdown.disabled = true;
+        }
+      });
+
+      topicDropdown.addEventListener("change", function() {
+        // clear previous options in chapter dropdown
+        chapterDropdown.innerHTML = "<option value=''>Select a chapter</option>";
+
+        // enable chapter dropdown
+        chapterDropdown.disabled = false;
+
+        // get selected subject and topic
+        const selectedSubject = subjectDropdown.value;
+        const selectedTopic = topicDropdown.value;
+
+        // get chapters for selected topic
+        const chapters = subjects[selectedSubject][selectedTopic];
+
+        // populate chapter dropdown
+        chapters.forEach(function(chapter) {
+          const option = document.createElement("option");
+          option.value = chapter;
+          option.text = chapter;
+          chapterDropdown.add(option);
+        });
+      });
+    </script>
+  </body>
+</html>
