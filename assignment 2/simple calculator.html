@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculator</title>
+	<style>
+		input[type="button"] {
+			width: 50px;
+			height: 50px;
+			font-size: 24px;
+			margin: 5px;
+			background-color: lightgray;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+		
+		input[type="text"] {
+			width: 210px;
+			height: 50px;
+			font-size: 24px;
+			text-align: right;
+			margin-bottom: 5px;
+			padding-right: 5px;
+		}
+		
+		input[type="button"]:hover {
+			background-color: gray;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<input type="text" id="calc-screen" readonly>
+	</div>
+	<div>
+		<input type="button" value="7" onclick="addToScreen('7')">
+		<input type="button" value="8" onclick="addToScreen('8')">
+		<input type="button" value="9" onclick="addToScreen('9')">
+		<input type="button" value="/" onclick="addToScreen('/')">
+	</div>
+	<div>
+		<input type="button" value="4" onclick="addToScreen('4')">
+		<input type="button" value="5" onclick="addToScreen('5')">
+		<input type="button" value="6" onclick="addToScreen('6')">
+		<input type="button" value="*" onclick="addToScreen('*')">
+	</div>
+	<div>
+		<input type="button" value="1" onclick="addToScreen('1')">
+		<input type="button" value="2" onclick="addToScreen('2')">
+		<input type="button" value="3" onclick="addToScreen('3')">
+		<input type="button" value="-" onclick="addToScreen('-')">
+	</div>
+	<div>
+		<input type="button" value="0" onclick="addToScreen('0')">
+		<input type="button" value="+" onclick="addToScreen('+')">
+		<input type="button" value="=" onclick="calculateResult()">
+		<input type="button" value="C" onclick="clearScreen()">
+	</div>
+	<script>
+		function addToScreen(char) {
+			document.getElementById("calc-screen").value += char;
+		}
+		
+		function calculateResult() {
+			let result = eval(document.getElementById("calc-screen").value);
+			document.getElementById("calc-screen").value = result;
+		}
+		
+		function clearScreen() {
+			document.getElementById("calc-screen").value = "";
+		}
+	</script>
+</body>
+</html>
