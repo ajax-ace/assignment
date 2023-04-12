@@ -1,4 +1,4 @@
->## Back-End Link (updated by kt...)
+>## Back-End Link
 
    - https://github.com/ajax-ace/idk.git
 
