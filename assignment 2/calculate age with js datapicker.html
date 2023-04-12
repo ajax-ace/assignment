@@ -1,0 +1,40 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculate Age</title>
+	<script>
+		function calculateAge() {
+			var dob = document.getElementById("dob").value;
+			var dobDate = new Date(dob);
+			var todayDate = new Date();
+			var ageInMilliseconds = todayDate.getTime() - dobDate.getTime();
+			var ageDate = new Date(ageInMilliseconds); 
+			var years = Math.abs(ageDate.getUTCFullYear() - 1970);
+			var months = ageDate.getUTCMonth();
+			var days = ageDate.getUTCDate() - 1;
+			document.getElementById("age").value = years + " years, " + months + " months, " + days + " days";
+		}
+	</script>
+</head>
+<body>
+	<h2>Calculate Age</h2>
+	<label for="dob">Date of Birth:</label>
+	<input type="date" id="dob" onchange="calculateAge()">
+	<br>
+	<label for="age">Age:</label>
+	<input type="text" id="age" readonly>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
